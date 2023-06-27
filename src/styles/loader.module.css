@@ -1,0 +1,28 @@
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  place-content: center;
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.circle {
+  position: absolute;
+  background-color: #50aef6;
+  border-radius: 100%;
+  opacity: 0.6;
+  animation: 2s ease-in-out 1s infinite running scaleAnimation;
+}
+
+@keyframes scaleAnimation {
+  from {
+    height: 30px;
+    width: 30px;
+  }
+  to {
+    width: 0;
+    height: 0;
+  }
+}
