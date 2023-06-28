@@ -10,7 +10,6 @@ const PodcastList = () => {
   const dispatch = useDispatch();
   const podcasts = useSelector((state) => state.podcasts);
   const dateFetch = useSelector((state) => state.dateFetch);
-  console.log(podcasts);
   const loading = useSelector((state) => state.loading);
   const [searchTerm, setSearchTerm] = useState("");
 

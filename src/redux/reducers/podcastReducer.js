@@ -13,8 +13,6 @@ const initialState = {
   podcastsdetails: [],
 };
 
-console.log(initialState)
-
 const podcastReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PODCASTS_REQUEST:
