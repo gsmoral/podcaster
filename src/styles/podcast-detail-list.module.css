@@ -1,0 +1,19 @@
+.card {
+  background: white;
+  margin-bottom: 10px;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+}
+
+.titleCard {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  margin: 0;
+}
+
+.tableCard {
+  padding: 2rem 1.5rem;
+}
