@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.section {
+  width: 300px;
+  min-width: 300px;
+  margin-right: 2rem;
+  display: flex;
+}
+
+.outlet {
+  width: calc(100% - 300px - 4rem);
+}
+
+@media (max-width: 799px) {
+  .section {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+    display: flex;
+  }
+  .outlet {
+    width: 100%;
+  }
+}
