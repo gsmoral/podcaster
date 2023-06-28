@@ -11,7 +11,7 @@ const PodcastDetailList = () => {
   const params = useParams();
 
   // Redirect to home if no parms or data
-  if (!params.podcastId || podcasts.length === 0 ) {
+  if (!params.podcastId) {
     navigate("/");
   }
 

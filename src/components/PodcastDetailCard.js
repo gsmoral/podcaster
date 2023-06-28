@@ -9,11 +9,6 @@ const PodcastDetailCard = () => {
   const podcastsdetails = useSelector((state) => state.podcastsdetails);
   const params = useParams();
 
-  // Redirect to home if no parms
-  if (!params.podcastId) {
-    navigate("/");
-  }
-
   // Find selected podcast
   const selectedPodcast = podcasts?.find(element => element.id.attributes['im:id'] === params.podcastId);
 

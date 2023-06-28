@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPodcastsDetail } from '../redux/actions/podcastActions';
+import { fetchPodcastsDetail, fetchPodcasts } from '../redux/actions/podcastActions';
 import PodcastDetailCard from './PodcastDetailCard';
 import styles from '../styles/podcast-details.module.css';
 
@@ -9,13 +9,8 @@ const PodcastDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const podcasts = useSelector((state) => state.podcasts);
-  const podcastsdetails = useSelector((state) => state.podcastsdetails);  
+  const podcastsdetails = useSelector((state) => state.podcastsdetails);
   const params = useParams();
-
-  // Redirect to home if no parms or data
-  if (!params.podcastId || podcasts.length === 0 ) {
-    navigate("/");
-  }
 
   /**
    * Calculate the number of days between two dates.
@@ -27,6 +22,17 @@ const PodcastDetails = () => {
   };
 
   useEffect(() => {
+    // Redirect to home if no parms or data
+    if (!params.podcastId) { 
+      navigate("/");
+      return;
+    }
+
+    // Reload data
+    if (params.podcastId && podcasts.length === 0) {
+      dispatch(fetchPodcasts());
+    }
+
     // Create a cancel signal in order to cancel request if component unmounted
     const controller = new AbortController();
     let sendDispach = false;
@@ -44,13 +50,13 @@ const PodcastDetails = () => {
     }
 
     return () => {
-      // Cancela request when component unmounted
+      // Cancel request when component unmounted
       if (sendDispach) {
         controller.abort();
       }
     };
 
-  }, [dispatch, params, podcastsdetails]);
+  }, [dispatch, navigate, params, podcastsdetails, podcasts]);
 
   return (
     <div className={styles.container}>

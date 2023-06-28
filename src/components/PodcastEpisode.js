@@ -1,24 +1,24 @@
 import { useEffect } from "react";
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from "react-router-dom";
+import { fetchPodcastsDetail } from '../redux/actions/podcastActions';
 import styles from "../styles/podcast-episode.module.css";
 
 const PodcastEpisode = () => {
+  const dispatch = useDispatch();
   const params = useParams();
-  const navigate = useNavigate();
   const podcastsdetails = useSelector((state) => state.podcastsdetails);
 
   // Get podcast and episode
   const selectedPodcast = podcastsdetails?.find(element => element.podcastId === params.podcastId);
   const selectedEpisode = selectedPodcast?.results?.find(element => element.trackId === parseInt(params.episodeId));
 
-  // If no data for the episode, back to home
   useEffect(() => {
-    if (!selectedEpisode) {
-      // No episode, return to podcast-list
-      navigate("/");
+    // If no data for the episode, reload data
+    if (!podcastsdetails && params.podcastId && params.episodeId) {
+      dispatch(fetchPodcastsDetail(params.podcastId));
     }
-  }, [selectedEpisode, navigate]);
+  }, [dispatch, podcastsdetails, params]);
 
   /**
    * Parse episode description as HTML.
