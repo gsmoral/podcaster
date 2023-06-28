@@ -1,8 +1,10 @@
 import {
   FETCH_PODCASTS_REQUEST,
   FETCH_PODCASTS_SUCCESS,
-  FETCH_PODCASTS_DETAILS_SUCCESS,
   FETCH_PODCASTS_FAILURE,
+  FETCH_PODCASTS_DETAILS_REQUEST,
+  FETCH_PODCASTS_DETAILS_SUCCESS,
+  FETCH_PODCASTS_DETAILS_FAILURE,
 } from '../actions/podcastActions';
 
 const initialState = {
@@ -10,6 +12,7 @@ const initialState = {
   dateFetch: '',
   loading: false,
   error: null,
+  errorDetails: null,
   podcastsdetails: [],
 };
 
@@ -29,6 +32,18 @@ const podcastReducer = (state = initialState, action) => {
         loading: false,
         error: null,
       };
+    case FETCH_PODCASTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case FETCH_PODCASTS_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        errorDetails: null,
+      };
     case FETCH_PODCASTS_DETAILS_SUCCESS:
       return {
         ...state,
@@ -37,13 +52,13 @@ const podcastReducer = (state = initialState, action) => {
           {...action.payload, index: action.payload.podcastId},
         ],
         loading: false,
-        error: null,
+        errorDetails: null,
       };
-    case FETCH_PODCASTS_FAILURE:
+    case FETCH_PODCASTS_DETAILS_FAILURE:
       return {
         ...state,
         loading: false,
-        error: action.payload,
+        errorDetails: action.payload,
       };
     default:
       return state;
