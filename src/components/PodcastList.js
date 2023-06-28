@@ -74,17 +74,13 @@ const getDaysOld = (dateIni, dateEnd) => {
         />
       </div>
       {(!loading && filteredPodcasts.length === 0) && <p>No results found...</p>}
-      {loading ? (
-        <p>Loading podcasts...</p>
-      ) : (
-        <div className={styles.podcastContainer}>
-          {filteredPodcasts.map((podcast) => (
-            <div key={podcast.id.attributes['im:id']}>
-              <Link to={`/podcast/${podcast.id.attributes['im:id']}`}><PodcastCard podcast={podcast}></PodcastCard></Link>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className={styles.podcastContainer}>
+        {filteredPodcasts.map((podcast) => (
+          <div key={podcast.id.attributes['im:id']}>
+            <Link to={`/podcast/${podcast.id.attributes['im:id']}`}><PodcastCard podcast={podcast}></PodcastCard></Link>
+          </div>
+        ))}
+      </div>
     </>
   );
 };
