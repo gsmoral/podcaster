@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/table.module.css";
 
@@ -35,10 +36,10 @@ const Table = ({headers, items}) => {
         </tr>
       </thead>
       <tbody>
-        {items.map((item, index) => (
-          <>
+        {items.map((item) => (
+          <Fragment key={item.trackId}>
             {item.episodeUrl && (
-              <tr className={styles.tableRow} key={index}>
+              <tr className={styles.tableRow}>
                 <td className={styles.tableCellText}>
                   <Link
                     className={styles.episodeLink}
@@ -47,13 +48,15 @@ const Table = ({headers, items}) => {
                     {item.trackName}
                   </Link>
                 </td>
-                <td className={styles.tableCellText}>{formatDate(item.releaseDate)}</td>
                 <td className={styles.tableCellText}>
-                  {formatTime(item.trackTimeMillis)}
+                  {item.releaseDate ? formatDate(item.releaseDate) : '-'}
+                  </td>
+                <td className={styles.tableCellText}>
+                  {item.trackTimeMillis ? formatTime(item.trackTimeMillis) : '-'}
                 </td>
               </tr>
             )}
-          </>
+          </Fragment>
         ))}
       </tbody>
     </table>
