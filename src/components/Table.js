@@ -17,9 +17,10 @@ const formatDate = (dateString) => {
  */
 const formatTime = (timeInMillis) => {
   const duration = new Date(timeInMillis);
+  const hours = duration.getUTCHours().toString().padStart(2, "0");
   const minutes = duration.getUTCMinutes().toString().padStart(2, "0");
   const seconds = duration.getUTCSeconds().toString().padStart(2, "0");
-  const formattedDuration = `${minutes}:${seconds}`;
+  const formattedDuration = `${hours}:${minutes}:${seconds}`;
   return formattedDuration;
 }
 
