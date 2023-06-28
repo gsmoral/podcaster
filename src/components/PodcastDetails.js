@@ -50,7 +50,7 @@ const PodcastDetails = () => {
       }
     };
 
-  }, [dispatch, params]);
+  }, [dispatch, params, podcastsdetails]);
 
   return (
     <div className={styles.container}>
